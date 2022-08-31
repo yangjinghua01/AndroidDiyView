@@ -16,10 +16,6 @@
             <enum name="password" value="3" />
         </attr>
     </declare-styleable>
-    <declare-styleable name="mydiyText">
-        <attr name="mytext" format="string"/>
-        <attr name="mycolor" format="color"/>
-    </declare-styleable>
     <declare-styleable name="qqStepView">
         <attr name="outerColor" format="color"/>
         <attr name="innerColor" format="color"/>

@@ -17,10 +17,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.rgsc.myapplication.QQStepView
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:innerColor="@color/blue"
-        app:StepTextColor="@color/teal_200"
+        app:stepTextColor="@color/teal_200"
+        app:BorerWidth="50dp"
         app:stepTextSize="16sp"
         app:outerColor="@color/pink"/>
 </LinearLayout>
