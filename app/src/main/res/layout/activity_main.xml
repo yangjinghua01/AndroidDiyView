@@ -9,7 +9,7 @@
 
     <com.rgsc.myapplication.TextView
         app:mytext="辽宁yjh"
-        app:mytextColor="@color/design_default_color_secondary_variant"
+        app:mytextColor="@color/blue"
         app:myinputType="number"
         app:mytextSize="20sp"
         android:padding="10dp"
@@ -17,11 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.rgsc.myapplication.QQStepView
+        android:id="@+id/stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:innerColor="@color/blue"
-        app:stepTextColor="@color/teal_200"
-        app:BorerWidth="50dp"
-        app:stepTextSize="16sp"
+        app:stepTextColor="@color/black"
+        app:borerWidth="50dp"
+        app:stepTextSize="60sp"
         app:outerColor="@color/pink"/>
 </LinearLayout>

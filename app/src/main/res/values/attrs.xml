@@ -16,10 +16,10 @@
             <enum name="password" value="3" />
         </attr>
     </declare-styleable>
-    <declare-styleable name="qqStepView">
+    <declare-styleable name="QQStepView">
         <attr name="outerColor" format="color"/>
         <attr name="innerColor" format="color"/>
-        <attr name="BorerWidth" format="dimension"/>
+        <attr name="borerWidth" format="dimension"/>
         <attr name="stepTextSize" format="dimension"/>
         <attr name="stepTextColor" format="color"/>
     </declare-styleable>
