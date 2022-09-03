@@ -8,21 +8,30 @@
     tools:context=".MainActivity">
 
     <com.rgsc.myapplication.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_secondary"
+        android:padding="10dp"
+        app:myinputType="number"
         app:mytext="辽宁yjh"
         app:mytextColor="@color/blue"
-        app:myinputType="number"
-        app:mytextSize="20sp"
-        android:padding="10dp"
-        android:background="@color/design_default_color_secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:mytextSize="20sp" />
+
     <com.rgsc.myapplication.QQStepView
         android:id="@+id/stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:innerColor="@color/blue"
-        app:stepTextColor="@color/black"
         app:borerWidth="50dp"
-        app:stepTextSize="60sp"
-        app:outerColor="@color/pink"/>
+        app:innerColor="@color/blue"
+        app:outerColor="@color/pink"
+        app:stepTextColor="@color/black"
+        app:stepTextSize="60sp" />
+
+    <com.rgsc.myapplication.ColorTrackTextView
+        android:text="Hellow World"
+        android:layout_width="match_parent"
+        app:changeColor="@color/blue"
+        android:textSize="60sp"
+        app:originColor="@color/pink"
+        android:layout_height="wrap_content" />
 </LinearLayout>
