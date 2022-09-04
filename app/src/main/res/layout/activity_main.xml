@@ -18,6 +18,7 @@
         app:mytextSize="20sp" />
 
     <com.rgsc.myapplication.QQStepView
+        android:visibility="gone"
         android:id="@+id/stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
         app:stepTextSize="60sp" />
 
     <com.rgsc.myapplication.ColorTrackTextView
+        android:visibility="gone"
         android:id="@+id/color_text_trantion"
         android:text="Hellow World"
         android:layout_width="match_parent"
@@ -37,17 +39,35 @@
         android:layout_height="wrap_content" />
     <Button
         android:text="左到右"
+        android:visibility="gone"
         android:onClick="LefttoRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <Button
         android:text="右到左"
+        android:visibility="gone"
         android:onClick="RighttoLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/jump"
+        android:visibility="gone"
         android:text="跳转"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/propress_bar_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <com.rgsc.myapplication.PropressBar
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center"
+        app:progressTextsize="200sp"
+        app:progressTextColor="@color/black"
+        app:innerBackground="@color/blue"
+        app:outerBackground="@color/pink"
+        app:roundWidth="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

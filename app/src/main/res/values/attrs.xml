@@ -17,15 +17,23 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="QQStepView">
-        <attr name="outerColor" format="color"/>
-        <attr name="innerColor" format="color"/>
-        <attr name="borerWidth" format="dimension"/>
-        <attr name="stepTextSize" format="dimension"/>
-        <attr name="stepTextColor" format="color"/>
+        <attr name="outerColor" format="color" />
+        <attr name="innerColor" format="color" />
+        <attr name="borerWidth" format="dimension" />
+        <attr name="stepTextSize" format="dimension" />
+        <attr name="stepTextColor" format="color" />
     </declare-styleable>
-<!--    自定义的颜色变化的颜色和不变化的颜色-->
+    <!--    自定义的颜色变化的颜色和不变化的颜色-->
     <declare-styleable name="ColorTrackTextView">
-        <attr name="originColor" format="color"/>
-        <attr name="changeColor" format="color"/>
+        <attr name="originColor" format="color" />
+        <attr name="changeColor" format="color" />
+    </declare-styleable>
+    <!--    自定义进度条bar的属性-->
+    <declare-styleable name="PropressBar">
+        <attr name="innerBackground" format="color" />
+        <attr name="outerBackground" format="color" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="progressTextsize" format="dimension" />
+        <attr name="progressTextColor" format="color" />
     </declare-styleable>
 </resources>

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ColorTrackTextView color_text_trantion;
     private QQStepView qqStepView;
     private Button btn;
+    private PropressBar progress_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        progress_bar = findViewById(R.id.progress_bar);
+        //        属性动画
+        ValueAnimator valueAnimator = ObjectAnimator.ofFloat(0, 2000);
+        valueAnimator.setDuration(1500);
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float animatedValue = (float) animation.getAnimatedValue();
+                progress_bar.setmPropress((int)( animatedValue/20));
+            }
+        });
+        valueAnimator.start();
     }
 
 
