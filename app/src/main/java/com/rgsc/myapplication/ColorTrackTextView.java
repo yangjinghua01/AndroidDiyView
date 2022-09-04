@@ -18,6 +18,13 @@ public class ColorTrackTextView extends androidx.appcompat.widget.AppCompatTextV
     private Paint mChangePaint;
     //    3.实现一个文字两种颜色 - 当前的进度
     private float mCurrentProgree = 0.2f;
+    //    朝向
+    private Direction mdirection = Direction.LEFT_TO_RIGHT;
+    private int originColor, changeColor;
+
+    public enum Direction {
+        LEFT_TO_RIGHT, RIGHT_TO_LEFT
+    }
 
     public ColorTrackTextView(Context context) {
         this(context, null);
@@ -31,8 +38,8 @@ public class ColorTrackTextView extends androidx.appcompat.widget.AppCompatTextV
     public ColorTrackTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorTrackTextView);
-        int originColor = typedArray.getColor(R.styleable.ColorTrackTextView_originColor, getTextColors().getDefaultColor());
-        int changeColor = typedArray.getColor(R.styleable.ColorTrackTextView_changeColor, getTextColors().getDefaultColor());
+        originColor = typedArray.getColor(R.styleable.ColorTrackTextView_originColor, getTextColors().getDefaultColor());
+        changeColor = typedArray.getColor(R.styleable.ColorTrackTextView_changeColor, getTextColors().getDefaultColor());
         mOriginPaint = getpaintColor(originColor);
         mChangePaint = getpaintColor(changeColor);
         typedArray.recycle();
@@ -66,9 +73,14 @@ public class ColorTrackTextView extends androidx.appcompat.widget.AppCompatTextV
 //        canvas.clipRect()   clipRec表示裁剪区域
 //        根据进度吧中间值算出来
         int middle = (int) (mCurrentProgree * getWidth());
-        drawText(canvas, mOriginPaint, 0, middle);
+        if (mdirection == Direction.LEFT_TO_RIGHT) {
+            drawText(canvas, mChangePaint, 0, middle);
 //绘制变色的
-        drawText(canvas, mChangePaint, middle, getWidth());
+            drawText(canvas, mOriginPaint, middle, getWidth());
+        } else {
+            drawText(canvas, mChangePaint, getWidth() - middle, getWidth());
+            drawText(canvas, mOriginPaint, 0, getWidth() - middle);
+        }
     }
 
     private void drawText(Canvas canvas, Paint paint, int start, int end) {
@@ -88,5 +100,30 @@ public class ColorTrackTextView extends androidx.appcompat.widget.AppCompatTextV
         int baseline = getHeight() / 2 + dy;
         canvas.drawText(text, x, baseline, paint);//这么画还是只有一种颜色
         canvas.restore(); // 释放画布
+    }
+
+    public void setMdirection(Direction mdirection) {
+        this.mdirection = mdirection;
+    }
+
+    public void setmOriginPaint(Paint mOriginPaint) {
+        this.mOriginPaint = mOriginPaint;
+    }
+
+    public void setmChangePaint(Paint mChangePaint) {
+        this.mChangePaint = mChangePaint;
+    }
+
+    public void setmCurrentProgree(float mCurrentProgree) {
+        this.mCurrentProgree = mCurrentProgree;
+        invalidate();
+    }
+
+    public void setOriginColor(int originColor) {
+        this.originColor = originColor;
+    }
+
+    public void setChangeColor(int changeColor) {
+        this.mChangePaint.setColor(changeColor);
     }
 }

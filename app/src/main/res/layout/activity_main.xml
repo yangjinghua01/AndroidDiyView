@@ -28,10 +28,26 @@
         app:stepTextSize="60sp" />
 
     <com.rgsc.myapplication.ColorTrackTextView
+        android:id="@+id/color_text_trantion"
         android:text="Hellow World"
         android:layout_width="match_parent"
-        app:changeColor="@color/blue"
+        app:changeColor="@color/pink"
         android:textSize="60sp"
-        app:originColor="@color/pink"
+        app:originColor="@color/black"
         android:layout_height="wrap_content" />
+    <Button
+        android:text="左到右"
+        android:onClick="LefttoRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:text="右到左"
+        android:onClick="RighttoLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/jump"
+        android:text="跳转"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
