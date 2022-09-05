@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,15 +14,16 @@
         android:background="@color/design_default_color_secondary"
         android:padding="10dp"
         app:myinputType="number"
+        android:visibility="gone"
         app:mytext="辽宁yjh"
         app:mytextColor="@color/blue"
         app:mytextSize="20sp" />
 
     <com.rgsc.myapplication.QQStepView
-        android:visibility="gone"
         android:id="@+id/stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:borerWidth="50dp"
         app:innerColor="@color/blue"
         app:outerColor="@color/pink"
@@ -29,45 +31,62 @@
         app:stepTextSize="60sp" />
 
     <com.rgsc.myapplication.ColorTrackTextView
-        android:visibility="gone"
         android:id="@+id/color_text_trantion"
-        android:text="Hellow World"
         android:layout_width="match_parent"
-        app:changeColor="@color/pink"
+        android:layout_height="wrap_content"
+        android:text="Hellow World"
         android:textSize="60sp"
-        app:originColor="@color/black"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="左到右"
         android:visibility="gone"
+        app:changeColor="@color/pink"
+        app:originColor="@color/black" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="LefttoRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="左到右"
+        android:visibility="gone" />
+
     <Button
-        android:text="右到左"
-        android:visibility="gone"
-        android:onClick="RighttoLeft"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:onClick="RighttoLeft"
+        android:text="右到左"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/jump"
-        android:visibility="gone"
-        android:text="跳转"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="跳转"
+        android:visibility="gone" />
+
     <Button
-        android:visibility="gone"
         android:id="@+id/propress_bar_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <com.rgsc.myapplication.PropressBar
         android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        app:progressTextsize="200sp"
-        app:progressTextColor="@color/black"
+        android:visibility="gone"
         app:innerBackground="@color/blue"
         app:outerBackground="@color/pink"
-        app:roundWidth="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        app:progressTextColor="@color/black"
+        app:progressTextsize="200sp"
+        app:roundWidth="50dp" />
+
+    <com.rgsc.myapplication.ShapeVIew
+        android:id="@+id/shap_view"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center" />
+    <Button
+        android:text="切换"
+        android:onClick="exchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

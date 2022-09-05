@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private QQStepView qqStepView;
     private Button btn;
     private PropressBar progress_bar;
+    private ShapeVIew shap_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         qqStepView = findViewById(R.id.stepview);
         color_text_trantion = findViewById(R.id.color_text_trantion);
         btn = findViewById(R.id.jump);
+        shap_view = findViewById(R.id.shap_view);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float animatedValue = (float) animation.getAnimatedValue();
-                progress_bar.setmPropress((int)( animatedValue/20));
+                progress_bar.setmPropress((int) (animatedValue / 20));
             }
         });
         valueAnimator.start();
@@ -90,5 +92,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         valueAnimator.start();
+    }
+
+    public void exchange(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            shap_view.exchange();
+                        }
+                    });
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 }
