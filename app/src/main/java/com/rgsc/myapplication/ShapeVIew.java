@@ -38,6 +38,7 @@ public class ShapeVIew extends View {
         setMeasuredDimension(Math.min(width, height), Math.min(width, height));
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
