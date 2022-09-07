@@ -96,6 +96,7 @@
         app:starNormal="@mipmap/star_normal"
         app:starFocus="@mipmap/star_selected"
         android:paddingLeft="5dp"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
