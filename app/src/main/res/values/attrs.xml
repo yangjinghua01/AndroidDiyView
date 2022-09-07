@@ -41,4 +41,9 @@
         <attr name="starFocus" format="reference"/>
         <attr name="gradeNumber" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="LetterSideBar">
+        <attr name="barTextColor" format="color"/>
+        <attr name="barTextSize" format="dimension"/>
+        <attr name="barSelectColor" format="color"/>
+    </declare-styleable>
 </resources>

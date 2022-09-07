@@ -1,4 +1,89 @@
 package com.rgsc.myapplication;
 
-public class LetterSideBar {
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.MotionEvent;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+
+/**
+ * 侧边字母栏
+ */
+public class LetterSideBar extends View {
+    private Paint mPaint;
+    private int barTextColor = Color.BLUE;
+    private int barTextSize = 20;
+    private int barSelectColor = Color.BLACK;
+    public static String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+            "W", "X", "Y", "Z", "#"};
+
+    public LetterSideBar(Context context) {
+        this(context, null);
+    }
+
+    public LetterSideBar(Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public LetterSideBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LetterSideBar);
+        barTextColor = typedArray.getColor(R.styleable.LetterSideBar_barTextColor, barTextColor);
+        barSelectColor = typedArray.getColor(R.styleable.LetterSideBar_barSelectColor, barSelectColor);
+//       <attr name="roundWidth" format="dimension" /> 获取xml样式里的dimension属性的时候应该用getDimensionPixelSize 不然报错很麻烦
+        barTextSize = (int) typedArray.getDimensionPixelSize(R.styleable.PropressBar_roundWidth, sp2px(barTextSize));
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setTextSize(barTextSize);
+        mPaint.setColor(barTextColor);
+    }
+
+    //    sp 转 px
+    private int sp2px(float sp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getResources().getDisplayMetrics());
+    }
+
+    private float dip2px(int dip) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int textWidth = (int) mPaint.measureText("A");
+//        计算指定宽度 =左右的padding + 字母的宽度(取决于画笔)
+        int width = getPaddingLeft() + getPaddingRight() + textWidth;
+//        高度不需要计算可以直接获取
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+//        画26个字母
+        for (int i = 0; i < letters.length; i++) {
+            int itemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / letters.length;
+//            基线  ---->  知道每个字母的中心位置    第一个字母字母高度的一半 第二个前面的加上 自己的一半
+            int LetterCenterY = itemHeight / 2 + i * itemHeight + getPaddingTop();
+            Paint.FontMetricsInt fontMetricsInt = mPaint.getFontMetricsInt();
+            int dy = (int) ((fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom);
+            int baseLine = LetterCenterY + dy;
+            canvas.drawText(letters[i], getPaddingLeft(), baseLine, mPaint);
+        }
+
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return true;
+    }
 }
