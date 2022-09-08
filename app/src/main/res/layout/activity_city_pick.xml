@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CityPickActivity">
+    <View
+        android:id="@+id/bg"
+        android:text="A"
+        android:visibility="gone"
+        android:background="@drawable/draw_cirle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/letter_tv"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
     <com.rgsc.myapplication.LetterSideBar
+        android:id="@+id/sidebar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:padding="10dp"
+        app:barSelectColor="@color/pink"
         app:barTextColor="@color/blue"
         app:barTextSize="20sp" />
 </RelativeLayout>

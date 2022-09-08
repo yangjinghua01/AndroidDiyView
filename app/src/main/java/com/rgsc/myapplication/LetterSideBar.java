@@ -23,6 +23,12 @@ public class LetterSideBar extends View {
     public static String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "Y", "Z", "#"};
+    private String TouchLettter;
+    private MoveListener listener;
+
+    public void setListener(MoveListener listener) {
+        this.listener = listener;
+    }
 
     public LetterSideBar(Context context) {
         this(context, null);
@@ -76,14 +82,54 @@ public class LetterSideBar extends View {
             Paint.FontMetricsInt fontMetricsInt = mPaint.getFontMetricsInt();
             int dy = (int) ((fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom);
             int baseLine = LetterCenterY + dy;
-            canvas.drawText(letters[i], getPaddingLeft(), baseLine, mPaint);
+//            x 绘制在最中间 = 宽度/2 -文字/2
+            int textWidth = (int) mPaint.measureText(letters[i]);
+            int x = getWidth() / 2 - textWidth / 2;
+//            当前字母要高亮
+            if (letters[i].equals(TouchLettter)) {
+                mPaint.setColor(barSelectColor);
+                canvas.drawText(letters[i], x, baseLine, mPaint);
+            } else {
+                mPaint.setColor(barTextColor);
+                canvas.drawText(letters[i], x, baseLine, mPaint);
+            }
+
         }
-
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+//                 计算出当前触摸字母
+                float currentMoveY = event.getY();   //------------------->这里可能会有负数
+//                当前的y轴位置 除 字母高度 获得字母是哪个
+                int itemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / letters.length;
+                int currentPosition = (int) (currentMoveY / itemHeight);
+                if (currentPosition < 0) {
+                    currentPosition = 0;
+                }
+                if (currentPosition > letters.length - 1) {
+                    currentPosition = letters.length - 1;
+                }
+                TouchLettter = letters[currentPosition];
+                if (listener != null) {
+                    listener.select(TouchLettter, true);
+                }
+//                重新绘制
+                invalidate();
+                break;
+            case MotionEvent.ACTION_UP:
+                listener.select("", false);
+                mPaint.setColor(barTextColor);
+                TouchLettter = "";
+                invalidate();
+                break;
+        }
         return true;
+    }
+
+    public interface MoveListener {
+        void select(String str, boolean touch);
     }
 }
