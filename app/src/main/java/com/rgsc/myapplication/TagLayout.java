@@ -1,6 +1,7 @@
 package com.rgsc.myapplication;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class TagLayout extends ViewGroup {
     private int childCount;
+    private BaseAdapter mAdapter;
     private List<List<View>> mChildViews = new ArrayList<>();
 
     public TagLayout(Context context) {
@@ -28,11 +30,6 @@ public class TagLayout extends ViewGroup {
     /**
      * 摆放子view
      *
-     * @param changed
-     * @param l
-     * @param t
-     * @param r
-     * @param b
      */
     // 2.1 onMeasure() 指定宽高
     @Override
@@ -72,7 +69,7 @@ public class TagLayout extends ViewGroup {
             // 什么时候需要换行，一行不够的情况下 考虑 margin
             if (lineWidth + (childView.getMeasuredWidth() + params.rightMargin + params.leftMargin) > width) {
                 // 换行,累加高度  加上一行条目中最大的高度
-                height += childView.getMeasuredHeight() + params.bottomMargin + params.topMargin;
+                height += maxHeight;
                 lineWidth = childView.getMeasuredWidth() + params.rightMargin + params.leftMargin;
                 childViews = new ArrayList<>();
                 mChildViews.add(childViews);
@@ -114,7 +111,7 @@ public class TagLayout extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
         int left, top = getPaddingTop(), right, bottom;
-
+        int maxHeight = 0;
         for (List<View> childViews : mChildViews) {
             left = getPaddingLeft();
 
@@ -132,11 +129,50 @@ public class TagLayout extends ViewGroup {
                 childView.layout(left, childTop, right, bottom);
                 // left 叠加
                 left += childView.getMeasuredWidth() + params.rightMargin;
+                int childHeight = childView.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+                maxHeight = Math.max(maxHeight, childHeight);
             }
-
             // 不断的叠加top值
-            ViewGroup.MarginLayoutParams params = (MarginLayoutParams) childViews.get(0).getLayoutParams();
-            top += childViews.get(0).getMeasuredHeight() + params.topMargin + params.bottomMargin;
+            top += maxHeight;
         }
     }
+//    这种方式代码的耦合度太高了
+    public void addTags(List<String> mItems) {
+
+    }
+
+    public void setAdapter(BaseAdapter Adapter) {
+        if (Adapter==null){
+            throw new NullPointerException("未设置设配器");
+        }
+//        清空所有子view
+        removeAllViews();
+        mAdapter =null;
+        mAdapter =Adapter;
+//        获取数量
+        int childCount =Adapter.getCount();
+        for (int i = 0; i <childCount; i++) {
+//            通过位置获取View
+            View view = mAdapter.getView(i,this);
+            addView(view);
+        }
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+    }
 }
+//View事件分发的回顾
+//onTouchListener(返回false)   --->  onTouchEvent --> OnclickListener
+//如果onTouchListener返回true只会执行OnTouchListener
+//dispatchTouchEvent（） -> onTouchEvent()
+
+
+//ViewGroup的事件分发
+//dispatchTouchEvent（）源码
+//onTouchEvent（） 源码
+//onInterceptTouchEvent（） 源码
+
+
+
