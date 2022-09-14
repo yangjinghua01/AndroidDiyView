@@ -35,7 +35,7 @@ public class Viewguocheng extends Activity {
         touchView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i(TAG, "MainTouch: "+event.getAction());
+                Log.i(TAG, "View MainTouch: "+event.getAction());
                 return true;
             }
         });
