@@ -3,15 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    app:menuRightMargin="10dp"
-    android:background="@mipmap/meizi"
     android:layout_height="match_parent"
+    android:background="@mipmap/meizi"
+    app:menuRightMargin="10dp"
     tools:context=".activity.MainActivity2">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-    <include layout="@layout/layout_home_menu"/>
-    <include layout="@layout/layout_home_content"/>
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <include layout="@layout/layout_home_menu" android:visibility="visible"/>
+
+        <include layout="@layout/layout_home_content" android:visibility="visible"/>
     </LinearLayout>
+
 </com.rgsc.myapplication.widgetViewGroup.SlidingMenu>

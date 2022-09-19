@@ -20,8 +20,11 @@ public class SlidingMenu extends HorizontalScrollView {
     //    菜单的宽度
     private int mMenuWidth;
     private View menuView, contentView;
-//    快速滑动处理
+    //    快速滑动处理
     private GestureDetector gestureDetector;
+    //    菜单是否打开
+    private boolean mMenuisOpen = false;
+    private boolean isIntercept = false;
 
     public SlidingMenu(Context context) {
         this(context, null);
@@ -38,7 +41,26 @@ public class SlidingMenu extends HorizontalScrollView {
         float rightMargin = typedArray.getDimension(R.styleable.SlidingMenu_menuRightMargin, ScreenUtils.dip2px(mContext, 50));
         mMenuWidth = (int) (ScreenUtils.getScreenWidth(mContext) - rightMargin);
         typedArray.recycle();
+        gestureDetector = new GestureDetector(mContext, mGestureListener);
     }
+
+    private GestureDetector.OnGestureListener mGestureListener = new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (mMenuisOpen) {
+                if (velocityX < 0) {
+                    closeMenu();
+                    return true;
+                }
+            } else {
+                if (velocityX > 0) {
+                    openMenu();
+                    return true;
+                }
+            }
+            return true;
+        }
+    };
 
     //    1.宽度不对  指定宽高
     @Override
@@ -75,18 +97,18 @@ public class SlidingMenu extends HorizontalScrollView {
         float rightScale = 0.6f + 0.4f * scale;
 //        设置右边的缩放
 //        缩放的中心点位置
-        ViewCompat.setPivotX(contentView,0);
-        ViewCompat.setPivotY(contentView,contentView.getMeasuredHeight()/2);
-        ViewCompat.setScaleX(contentView,rightScale);
-        ViewCompat.setScaleY(contentView,rightScale);
+        ViewCompat.setPivotX(contentView, 0);
+        ViewCompat.setPivotY(contentView, contentView.getMeasuredHeight() / 2);
+        ViewCompat.setScaleX(contentView, rightScale);
+        ViewCompat.setScaleY(contentView, rightScale);
 //        菜单是 半透明到完全透明
 //        缩放 0.7f 到 1f
-        float leftAlphla = 0.3f+ (1-scale)*0.7f;
-        ViewCompat.setAlpha(menuView,leftAlphla);
-        float leftScale = 0.7f+(1-scale)*0.3f;
-        ViewCompat.setScaleX(menuView,leftScale);
-        ViewCompat.setScaleY(menuView,leftScale);
-        ViewCompat.setTranslationX(menuView,(l*0.25f));
+        float leftAlphla = 0.3f + (1 - scale) * 0.7f;
+        ViewCompat.setAlpha(menuView, leftAlphla);
+        float leftScale = 0.7f + (1 - scale) * 0.3f;
+        ViewCompat.setScaleX(menuView, leftScale);
+        ViewCompat.setScaleY(menuView, leftScale);
+        ViewCompat.setTranslationX(menuView, (l * 0.25f));
     }
 
     @Override
@@ -98,6 +120,12 @@ public class SlidingMenu extends HorizontalScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        if (isIntercept) {
+            return true;
+        }
+        if (gestureDetector.onTouchEvent(ev)) {
+            return true;
+        }//快速滑动执行了下面就不要执行
         if (ev.getAction() == MotionEvent.ACTION_UP) {
 //            手指抬起根据当前滚动的距离来判断
             int currentScrollX = getScrollX();
@@ -118,6 +146,7 @@ public class SlidingMenu extends HorizontalScrollView {
      */
     private void openMenu() {
         smoothScrollTo(0, 0);
+        mMenuisOpen = true;
     }
 
     /**
@@ -126,6 +155,22 @@ public class SlidingMenu extends HorizontalScrollView {
      */
     private void closeMenu() {
         smoothScrollTo(mMenuWidth, 0);
+        mMenuisOpen = false;
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        isIntercept = false;
+        if (mMenuisOpen) {
+            float currentX = ev.getX();
+            if (currentX > mMenuWidth) {
+                closeMenu();
+                isIntercept = true;
+//                子view不需要响应任何时间点击和触摸 拦截子view的事件
+//                如果返回true我会拦截子view的事件但是我会响应自己的onTouch事件，
+                return true;
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
 }
