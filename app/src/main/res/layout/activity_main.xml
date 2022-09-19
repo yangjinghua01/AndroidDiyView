@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <com.rgsc.myapplication.TextView
+    <com.rgsc.myapplication.widgetView.TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/design_default_color_secondary"
@@ -18,7 +18,7 @@
         app:mytextColor="@color/blue"
         app:mytextSize="20sp" />
 
-    <com.rgsc.myapplication.QQStepView
+    <com.rgsc.myapplication.widgetView.QQStepView
         android:id="@+id/stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:stepTextColor="@color/black"
         app:stepTextSize="60sp" />
 
-    <com.rgsc.myapplication.ColorTrackTextView
+    <com.rgsc.myapplication.widgetView.ColorTrackTextView
         android:id="@+id/color_text_trantion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-    <com.rgsc.myapplication.PropressBar
+    <com.rgsc.myapplication.widgetView.PropressBar
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,7 +78,7 @@
         app:progressTextsize="200sp"
         app:roundWidth="50dp" />
 
-    <com.rgsc.myapplication.ShapeVIew
+    <com.rgsc.myapplication.widgetView.ShapeVIew
         android:id="@+id/shap_view"
         android:layout_width="30dp"
         android:visibility="gone"
@@ -90,7 +90,7 @@
         android:onClick="exchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <com.rgsc.myapplication.RatingBar
+    <com.rgsc.myapplication.widgetView.RatingBar
         app:gradeNumber="5"
         app:starNormal="@mipmap/star_normal"
         app:starFocus="@mipmap/star_selected"

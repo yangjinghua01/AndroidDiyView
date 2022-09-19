@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.rgsc.myapplication.R;
 
 public class TextView extends View {
     private String mText;

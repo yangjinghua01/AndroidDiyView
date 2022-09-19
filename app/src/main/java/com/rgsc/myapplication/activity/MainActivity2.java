@@ -1,8 +1,10 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.rgsc.myapplication.R;
 
 public class MainActivity2 extends AppCompatActivity {
 

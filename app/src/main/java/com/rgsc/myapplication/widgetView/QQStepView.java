@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.rgsc.myapplication.R;
 
 public class QQStepView extends View {
     private Paint mPaint;
@@ -40,7 +42,7 @@ public class QQStepView extends View {
 //        2.确定自定义属性，编写attrs.xml
 //        3.在布局中使用
 //        4.在自定义view中获取自定义属性
-        TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.QQStepView); //这里是两个参数
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QQStepView); //这里是两个参数
         mOuterColor = typedArray.getColor(R.styleable.QQStepView_outerColor, mOuterColor);
         minnerColor = typedArray.getColor(R.styleable.QQStepView_innerColor, minnerColor);
         mstepTextColor = typedArray.getColor(R.styleable.QQStepView_stepTextColor, mstepTextColor);

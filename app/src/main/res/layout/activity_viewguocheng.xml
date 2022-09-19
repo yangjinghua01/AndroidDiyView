@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.rgsc.myapplication.TouchViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<com.rgsc.myapplication.widgetViewGroup.TouchViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Viewguocheng"
+    tools:context=".activity.Viewguocheng"
     android:orientation="vertical">
 
     <TextView
@@ -15,15 +15,15 @@
         android:visibility="gone"
         android:textSize="14sp" />
 
-    <com.rgsc.myapplication.TagLayout
+    <com.rgsc.myapplication.widgetViewGroup.TagLayout
         android:id="@+id/tag_group"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <com.rgsc.myapplication.TouchView
+    <com.rgsc.myapplication.widgetView.TouchView
         android:id="@+id/touch_id"
         android:background="@color/blue"
         android:layout_width="200dp"
         android:layout_height="200dp"/>
 
-</com.rgsc.myapplication.TouchViewGroup>
+</com.rgsc.myapplication.widgetViewGroup.TouchViewGroup>

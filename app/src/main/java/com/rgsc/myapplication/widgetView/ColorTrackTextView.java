@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import com.rgsc.myapplication.R;
 
 public class ColorTrackTextView extends androidx.appcompat.widget.AppCompatTextView {
     //    1.实现一个文字两种颜色 - 绘制不变色字体的画笔

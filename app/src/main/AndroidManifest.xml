@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Viewguocheng"></activity>
-        <activity android:name=".CityPickActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ViewPageActivity" />
-        <activity android:name=".MainActivity2">
+        <activity android:name=".activity.Viewguocheng"></activity>
+        <activity android:name=".activity.CityPickActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.ViewPageActivity" />
+        <activity android:name=".activity.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

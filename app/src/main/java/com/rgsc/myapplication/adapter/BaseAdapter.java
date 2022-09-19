@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.adapter;
 
 import android.database.DataSetObserver;
 import android.view.View;

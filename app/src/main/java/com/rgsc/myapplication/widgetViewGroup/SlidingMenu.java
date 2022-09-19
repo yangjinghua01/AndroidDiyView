@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetViewGroup;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
 import androidx.core.view.ViewCompat;
+
+import com.rgsc.myapplication.R;
+import com.rgsc.myapplication.utils.ScreenUtils;
 
 public class SlidingMenu extends HorizontalScrollView {
     private Context mContext;

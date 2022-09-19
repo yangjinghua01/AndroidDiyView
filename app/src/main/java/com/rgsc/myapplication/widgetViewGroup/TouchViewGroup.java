@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetViewGroup;
 
 import android.content.Context;
 import android.util.AttributeSet;

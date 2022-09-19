@@ -1,11 +1,13 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.rgsc.myapplication.widgetView.LetterSideBar;
+import com.rgsc.myapplication.R;
 
 public class CityPickActivity extends AppCompatActivity {
     private TextView letter_tv;

@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.widgetView;
 
 import android.content.Context;
 import android.graphics.Canvas;

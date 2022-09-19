@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+
+import com.rgsc.myapplication.widgetView.ColorTrackTextView;
+import com.rgsc.myapplication.widgetView.PropressBar;
+import com.rgsc.myapplication.widgetView.QQStepView;
+import com.rgsc.myapplication.R;
+import com.rgsc.myapplication.widgetView.ShapeVIew;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,18 +1,19 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.rgsc.myapplication.widgetView.ColorTrackTextView;
+import com.rgsc.myapplication.fragment.ItemFragment;
+import com.rgsc.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.rgsc.myapplication;
+package com.rgsc.myapplication.utils;
 
 import android.app.Activity;
 import android.content.Context;

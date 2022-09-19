@@ -1,6 +1,4 @@
-package com.rgsc.myapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.rgsc.myapplication.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +8,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.rgsc.myapplication.adapter.BaseAdapter;
+import com.rgsc.myapplication.R;
+import com.rgsc.myapplication.widgetViewGroup.TagLayout;
+import com.rgsc.myapplication.widgetView.TouchView;
 
 import java.util.ArrayList;
 import java.util.List;
