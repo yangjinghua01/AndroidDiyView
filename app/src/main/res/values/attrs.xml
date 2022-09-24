@@ -49,4 +49,11 @@
     <declare-styleable name="SlidingMenu">
         <attr name="menuRightMargin" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="DownLoadProperBar">
+        <attr name="outAndInnerborderColor" format="color"/>
+        <attr name="circularRingWidth" format="dimension"/>
+        <attr name="circularRingBlowColor" format="color"/>
+        <attr name="circularRingAbounColor" format="color"/>
+    </declare-styleable>
+
 </resources>

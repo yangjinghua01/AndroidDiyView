@@ -98,5 +98,9 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <com.rgsc.myapplication.widgetView.DownLoadProperBar
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
