@@ -94,4 +94,8 @@ public class ShapeVIew extends View {
     public enum Shape {
         Circle, Square, Triangle
     }
+
+    public Shape getmCurrentshape() {
+        return mCurrentshape;
+    }
 }

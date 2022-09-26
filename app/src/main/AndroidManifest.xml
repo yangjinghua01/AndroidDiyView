@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".activity.QiCheZhiJiaActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity android:name=".activity.Viewguocheng" />
         <activity android:name=".activity.CityPickActivity" />
         <activity android:name=".activity.MainActivity2" />
         <activity android:name=".activity.ViewPageActivity" />
-        <activity android:name=".activity.QiCheZhiJiaActivity">
+        <activity android:name=".activity.WuBaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/drawable/loading_shadow.xml" value="0.113" />
         <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/layout/activity_qi_che_zhi_jia.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/layout/activity_wu_ba.xml" value="0.176" />
         <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/layout/item_tag.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/layout/list_item.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/16920/AndroidStudioProjects/MyApplication37/app/src/main/res/layout/ui_loader.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>
