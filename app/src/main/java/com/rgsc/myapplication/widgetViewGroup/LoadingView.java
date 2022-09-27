@@ -8,6 +8,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
@@ -25,6 +26,8 @@ public class LoadingView extends LinearLayout {
     private View shadow;
     private int mTranslationDistance = 0;
     private static final int Animatot_duration = 350;
+//    是否停止动画
+    private  boolean isStop = false;
 
     public LoadingView(Context context) {
         this(context, null);
@@ -54,11 +57,24 @@ public class LoadingView extends LinearLayout {
 //        添加到该view
         shapeVIew = findViewById(R.id.shap_view);
         shadow = findViewById(R.id.shadow);
-        startfallAnimator();
+        /**
+         *下面这一行注释的原因是在这个位置执行的话属于在onCreat中执行 这个方法在布局文件解析后执行 反射创建实例
+         */
+//        startfallAnimator();
+        post(new Runnable() {
+            @Override
+            public void run() {
+//                在onResume之后 也就是view绘制流程执行完成之后
+                startfallAnimator();
+            }
+        });
     }
 
     //开始下落动画
     private void startfallAnimator() {
+        if(isStop){
+            return;
+        }
 //        动画作用在谁身上
         ObjectAnimator translationAnimator = ObjectAnimator.ofFloat(shapeVIew, "translationY", 0, mTranslationDistance);
         translationAnimator.setDuration(Animatot_duration);
@@ -81,6 +97,9 @@ public class LoadingView extends LinearLayout {
     }
 
     private void startUpAnimator() {
+        if(isStop){
+            return;
+        }
         ObjectAnimator translationAnimator = ObjectAnimator.ofFloat(shapeVIew, "translationY", mTranslationDistance, 0);
         translationAnimator.setDuration(Animatot_duration);
         ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(shadow, "scaleX", 0.3f, 1f);
@@ -126,5 +145,18 @@ public class LoadingView extends LinearLayout {
         rotationAnimator.setDuration(Animatot_duration);
         rotationAnimator.setInterpolator(new DecelerateInterpolator());
         rotationAnimator.start();
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(View.INVISIBLE);//不要去摆放和计算，少走一些系统的源码
+        shapeVIew.clearAnimation();
+        shadow.clearAnimation();
+        ViewGroup parent = (ViewGroup) getParent();
+        if (parent != null) {
+            parent.removeView(this); //从父布局移除
+            removeAllViews();//移除自己所有的view
+        }
+        isStop =true;
     }
 }
