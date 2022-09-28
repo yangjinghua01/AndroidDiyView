@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,12 @@
     tools:context=".activity.WuBaActivity">
 
     <com.rgsc.myapplication.widgetViewGroup.LoadingView
+        android:visibility="gone"
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</LinearLayout>
+    <com.rgsc.myapplication.widgetViewGroup.ListDataScreenView
+        android:id="@+id/list_data_screen_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
