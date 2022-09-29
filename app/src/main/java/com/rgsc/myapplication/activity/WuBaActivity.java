@@ -15,7 +15,7 @@ private ListDataScreenView listDataScreenView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wu_ba);
-        listDataScreenView = findViewById(R.id.list_data_screen_view);
-        listDataScreenView.setAdapter( new ListScreenMenuAdapter(WuBaActivity.this));
+//        listDataScreenView = findViewById(R.id.list_data_screen_view);
+//        listDataScreenView.setAdapter( new ListScreenMenuAdapter(WuBaActivity.this));
     }
 }

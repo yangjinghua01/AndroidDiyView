@@ -11,8 +11,11 @@
 <!--        android:id="@+id/loading_view"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"/>-->
-    <com.rgsc.myapplication.outer.ListDataScreenView
-        android:id="@+id/list_data_screen_view"
+<!--    <com.rgsc.myapplication.outer.ListDataScreenView-->
+<!--        android:id="@+id/list_data_screen_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+    <com.rgsc.myapplication.widgetView.MessageBubbleView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>
