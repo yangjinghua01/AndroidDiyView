@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -56,12 +57,65 @@ public class MessageBubbleView extends View {
 //        画拖拽圆
         canvas.drawCircle(mDrafPoin.x, mDrafPoin.y, mDragRadius, mPaint);
 //        画固定圆 有一个初始化大小，而且他的半径是随着距离的增大而减小 小到一定程度就不见了。
-        double distance = getDistance(mDrafPoin, mFixationPoint);
-        mFixacttionRadius = (int) (mFixacttionRadiusMax - distance / 14);
-        if (mFixacttionRadius > mFixationRadiusMin) {
+
+        Path bezeierPath = getBezeierPath();
+        if (bezeierPath != null) {
             canvas.drawCircle(mFixationPoint.x, mFixationPoint.y, mFixacttionRadius, mPaint);
+            canvas.drawPath(bezeierPath, mPaint);
         }
 
+    }
+
+    /**
+     * 获取贝瑟尔路径
+     *
+     * @return
+     */
+    private Path getBezeierPath() {
+        double distance = getDistance(mDrafPoin, mFixationPoint);
+        mFixacttionRadius = (int) (mFixacttionRadiusMax - distance / 14);
+        if (mFixacttionRadius < mFixationRadiusMin) {
+//            超过一定距离贝瑟尔和固定圆就不画了
+            return null;
+        }
+        Path bezeierPath = new Path();
+//        求角
+//        求斜率
+        float dy = (mDrafPoin.y - mFixationPoint.y);
+        float dx = (mDrafPoin.x - mFixationPoint.x);
+        float tanA = dy / dx;
+        double arcTanA = Math.atan(tanA);
+//        p0
+        float p0x = (float) (mFixationPoint.x + mFixacttionRadius * Math.sin(arcTanA));
+        float p0y = (float) (mFixationPoint.y - mFixacttionRadius * Math.cos(arcTanA));
+//        p1
+        float p1x = (float) (mDrafPoin.x + mDragRadius * Math.sin(arcTanA));
+        float p1y = (float) (mDrafPoin.y - mDragRadius * Math.cos(arcTanA));
+        //        p2
+        float p2x = (float) (mDrafPoin.x - mDragRadius * Math.sin(arcTanA));
+        float p2y = (float) (mDrafPoin.y + mDragRadius * Math.cos(arcTanA));
+//        p3
+        float p3x = (float) (mFixationPoint.x - mDragRadius * Math.sin(arcTanA));
+        float p3y = (float) (mFixationPoint.y + mDragRadius * Math.cos(arcTanA));
+//        拼装贝瑟尔的曲线路径
+        bezeierPath.moveTo(p0x, p0y);
+//        两个点 第一个点（控制点）
+        PointF controlPoint = getcontrolPoint();
+        bezeierPath.quadTo(controlPoint.x, controlPoint.y, p1x, p1y);
+//        画第二条
+        bezeierPath.lineTo(p2x, p2y);
+        bezeierPath.quadTo(controlPoint.x, controlPoint.y, p3x, p3y);
+        bezeierPath.close();
+        return bezeierPath;
+    }
+
+    /**
+     * 控制点
+     *
+     * @return
+     */
+    private PointF getcontrolPoint() {
+        return new PointF((mDrafPoin.x + mFixationPoint.x) / 2, (mDrafPoin.y + mFixationPoint.y) / 2);
     }
 
     private double getDistance(PointF point1, PointF pointF2) {
