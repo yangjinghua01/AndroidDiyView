@@ -1,6 +1,12 @@
 package com.rgsc.myapplication.widgetView;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,8 +16,13 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.Nullable;
+
+import com.rgsc.myapplication.activity.MainActivity;
+import com.rgsc.myapplication.utils.BubbleUtils;
 
 public class MessageBubbleView extends View {
     private PointF mFixationPoint, mDrafPoin;
@@ -22,6 +33,7 @@ public class MessageBubbleView extends View {
     private int mFixationRadiusMin = 3;
     private int mFixacttionRadius;
     private int mFixacttionRadiusMax = 7;
+    private Bitmap mDragBitmap;
 
     public MessageBubbleView(Context context) {
         this(context, null);
@@ -63,7 +75,10 @@ public class MessageBubbleView extends View {
             canvas.drawCircle(mFixationPoint.x, mFixationPoint.y, mFixacttionRadius, mPaint);
             canvas.drawPath(bezeierPath, mPaint);
         }
-
+//画图片
+        if (mDragBitmap != null) {
+            canvas.drawBitmap(mDragBitmap, mDrafPoin.x - mDragBitmap.getWidth() / 2, mDrafPoin.y - mDragBitmap.getHeight() / 2, null);
+        }
     }
 
     /**
@@ -122,27 +137,27 @@ public class MessageBubbleView extends View {
         return Math.sqrt((point1.x - pointF2.x) * (point1.x - pointF2.x) + (point1.y - pointF2.y) * (point1.y - pointF2.y));
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-//                手指按下置顶当前的位置
-                float downX = event.getX();
-                float downY = event.getY();
-                initPoint(downX, downY);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float moveX = event.getX();
-                float moveY = event.getY();
-                updatePoint(moveX, moveY);
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-
-        }
-        invalidate();
-        return true;
-    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+////                手指按下置顶当前的位置
+//                float downX = event.getX();
+//                float downY = event.getY();
+//                initPoint(downX, downY);
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                float moveX = event.getX();
+//                float moveY = event.getY();
+//                updatePoint(moveX, moveY);
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                break;
+//
+//        }
+//        invalidate();
+//        return true;
+//    }
 
     /**
      * 跟新拖动位置
@@ -150,9 +165,11 @@ public class MessageBubbleView extends View {
      * @param moveX
      * @param moveY
      */
-    private void updatePoint(float moveX, float moveY) {
+    public void updatePoint(float moveX, float moveY) {
         mDrafPoin.x = moveX;
         mDrafPoin.y = moveY;
+//        重新绘制
+        invalidate();
     }
 
     /**
@@ -161,8 +178,71 @@ public class MessageBubbleView extends View {
      * @param downX
      * @param downY
      */
-    private void initPoint(float downX, float downY) {
+    public void initPoint(float downX, float downY) {
         mFixationPoint = new PointF(downX, downY);
         mDrafPoin = new PointF(downX, downY);
+    }
+
+    public static void attach(View view, BubleDispearListener dispearListener) {
+        if (view == null) {
+            throw new RuntimeException("View 为空请传入视图");
+        }
+        view.setOnTouchListener(new BubbleMessageTouchListener(view, view.getContext(),dispearListener));
+    }
+
+    public void setDragBitmap(Bitmap bitmapByView) {
+        this.mDragBitmap = bitmapByView;
+    }
+
+    /**
+     * 处理手指松开
+     */
+    public void handleActionUp() {
+        if (mFixacttionRadius > mFixationRadiusMin) {
+//回弹 执变化动画从0 到 1
+            ValueAnimator valueAnimator = ObjectAnimator.ofFloat(1);
+            valueAnimator.setDuration(350);
+            PointF start = new PointF(mDrafPoin.x, mDrafPoin.y);
+            PointF end = new PointF(mFixationPoint.x, mFixationPoint.y);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float perent = (float) animation.getAnimatedValue();
+                    PointF pointF = BubbleUtils.getPointByPercent(start, end, perent);
+                    updatePoint(pointF.x,pointF.y);
+                }
+            });
+            valueAnimator.setInterpolator(new OvershootInterpolator(3f));
+            valueAnimator.start();
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    if (messageBubbleListner!=null){
+                        messageBubbleListner.restore();
+                    }
+                }
+            });
+//            通知TouchListener 移除当前View
+        } else {
+//消失
+            if (messageBubbleListner!=null){
+                messageBubbleListner.dismiss(mDrafPoin);
+            }
+        }
+    }
+
+    public interface BubleDispearListener {
+        void disminss();
+    }
+    private MessageBubbleListner messageBubbleListner;
+
+    public void setMessageBubbleListner(MessageBubbleListner messageBubbleListner) {
+        this.messageBubbleListner = messageBubbleListner;
+    }
+
+    public interface MessageBubbleListner{
+        void restore();
+        void dismiss(PointF pointF);
     }
 }
