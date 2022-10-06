@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.rgsc.myapplication.widgetViewGroup.LoveLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/love_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.WuBaActivity">
-
-<!--    <com.rgsc.myapplication.widgetViewGroup.LoadingView-->
-<!--        android:visibility="gone"-->
-<!--        android:id="@+id/loading_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
-<!--    <com.rgsc.myapplication.outer.ListDataScreenView-->
-<!--        android:id="@+id/list_data_screen_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
-<!--    <com.rgsc.myapplication.widgetView.MessageBubbleView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
-    <TextView
-        android:id="@+id/text"
-        android:text="tesdakldjfkldsfkl"
-        android:background="@color/blue"
+    <!--58加载动画-->
+    <!--    <com.rgsc.myapplication.widgetViewGroup.LoadingView-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/loading_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"/>-->
+    <!--    二手车之家的菜单-->
+    <!--    <com.rgsc.myapplication.outer.ListDataScreenView-->
+    <!--        android:id="@+id/list_data_screen_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"/>-->
+    <!--    仿qq消息爆炸-->
+    <!--    <com.rgsc.myapplication.widgetView.MessageBubbleView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"/>-->
+    <!--    仿qq消息爆炸-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/text"-->
+    <!--        android:text="tesdakldjfkldsfkl"-->
+    <!--        android:background="@color/blue"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:padding="10dp" />-->
+    <Button
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp" />
-</RelativeLayout>
+        android:onClick="addlove"
+        android:text="添加" />
+</com.rgsc.myapplication.widgetViewGroup.LoveLayout>
