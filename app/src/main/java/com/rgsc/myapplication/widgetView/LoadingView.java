@@ -8,7 +8,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AnticipateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.Nullable;
 
@@ -97,8 +99,9 @@ public class LoadingView extends View {
         if (mLoadingState instanceof RotationState){
             RotationState rotationState = (RotationState) mLoadingState;
             rotationState.cancle();
+            mLoadingState = new MergeState();
         }
-        new MergeState();
+
     }
 
     public abstract class LoadingState {
@@ -170,8 +173,7 @@ public class LoadingView extends View {
                 }
             });
 //        不断的反复执行
-            valueAnimator.setInterpolator(new LinearInterpolator());
-            valueAnimator.setRepeatCount(-1);
+            valueAnimator.setInterpolator(new AnticipateInterpolator(3f));
             valueAnimator.start();
         }
 
