@@ -1,11 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.rgsc.myapplication.parallax.animation.ParallaxViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<com.rgsc.myapplication.parallax.animation.ParallaxViewPager xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/teal_200"-->
+<!--    android:id="@+id/parallax_view_pager"-->
+<!--    tools:context=".activity.yindaoActivity">-->
+
+<!--</com.rgsc.myapplication.parallax.animation.ParallaxViewPager>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parallax_view_pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_200"
-    android:id="@+id/parallax_view_pager"
     tools:context=".activity.yindaoActivity">
 
-</com.rgsc.myapplication.parallax.animation.ParallaxViewPager>
+    <com.rgsc.myapplication.widgetView.LoadingView
+        android:id="@+id/loadingview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
