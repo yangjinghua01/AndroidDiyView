@@ -1,5 +1,7 @@
 package com.rgsc.myapplication.widgetView;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -35,8 +37,12 @@ public class LoadingView extends View {
     private int mSolashColor = Color.WHITE;
     //当前动画状态
     private LoadingState mLoadingState;
-//    当前大圆的半径
+    //    当前大圆的半径
     private float mcurrentRotationRadius = mRotationRadius;
+    //    空心圆的半径
+    private float mHoleRadius = 0F;
+    //    屏幕的一半对角线
+    private float mDiagonalDist;
 
     public LoadingView(Context context) {
         this(context, null);
@@ -74,6 +80,7 @@ public class LoadingView extends View {
         mPaint.setDither(true);
         mCenterX = getMeasuredWidth() / 2;
         mCenterY = getMeasuredHeight() / 2;
+        mDiagonalDist = (float) Math.sqrt(mCenterX * mCenterX + mCenterY * mCenterY);
         mInitParams = true;
     }
 
@@ -96,7 +103,7 @@ public class LoadingView extends View {
     public void disappear() {
 //        开始聚合
 //        关闭动画
-        if (mLoadingState instanceof RotationState){
+        if (mLoadingState instanceof RotationState) {
             RotationState rotationState = (RotationState) mLoadingState;
             rotationState.cancle();
             mLoadingState = new MergeState();
@@ -161,9 +168,10 @@ public class LoadingView extends View {
      */
     public class MergeState extends LoadingState {
         private ValueAnimator valueAnimator;
+
         public MergeState() {
-            valueAnimator = ObjectAnimator.ofFloat(mRotationRadius,0);
-            valueAnimator.setDuration(ROTARTION_ANIMATION_TIME/2);
+            valueAnimator = ObjectAnimator.ofFloat(mRotationRadius, 0);
+            valueAnimator.setDuration(ROTARTION_ANIMATION_TIME / 2);
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -174,6 +182,13 @@ public class LoadingView extends View {
             });
 //        不断的反复执行
             valueAnimator.setInterpolator(new AnticipateInterpolator(3f));
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mLoadingState = new ExpandState();
+                }
+            });
             valueAnimator.start();
         }
 
@@ -200,9 +215,30 @@ public class LoadingView extends View {
      * 展开动画
      */
     public class ExpandState extends LoadingState {
+        private ValueAnimator valueAnimator;
+
+        public ExpandState() {
+            valueAnimator = ObjectAnimator.ofFloat(0, mDiagonalDist);
+            valueAnimator.setDuration(ROTARTION_ANIMATION_TIME / 2);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mHoleRadius = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+//        不断的反复执行
+            valueAnimator.start();
+        }
+
         @Override
         public void draw(Canvas canvas) {
-            canvas.drawColor(mSolashColor);
+            float strokeWidth = mDiagonalDist - mHoleRadius;
+            mPaint.setStrokeWidth(strokeWidth);
+            mPaint.setColor(mSolashColor);
+            mPaint.setStyle(Paint.Style.STROKE);
+            float radius = strokeWidth/2+mHoleRadius;
+            canvas.drawCircle(mCenterX, mCenterY, radius, mPaint);
 
         }
 
