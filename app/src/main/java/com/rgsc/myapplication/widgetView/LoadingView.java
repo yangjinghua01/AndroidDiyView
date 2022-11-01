@@ -237,7 +237,7 @@ public class LoadingView extends View {
             mPaint.setStrokeWidth(strokeWidth);
             mPaint.setColor(mSolashColor);
             mPaint.setStyle(Paint.Style.STROKE);
-            float radius = strokeWidth/2+mHoleRadius;
+            float radius = strokeWidth / 2 + mHoleRadius;
             canvas.drawCircle(mCenterX, mCenterY, radius, mPaint);
 
         }

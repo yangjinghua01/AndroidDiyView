@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".SwipeBackLayout.IntentTestMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.yindaoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.WuBaActivity"
             android:exported="false" />
         <activity
@@ -22,7 +28,8 @@
         <activity android:name=".activity.CityPickActivity" />
         <activity android:name=".activity.MainActivity2" />
         <activity android:name=".activity.ViewPageActivity" />
-        <activity android:name=".activity.yindaoActivity"
+        <activity
+            android:name=".SwipeBackLayout.IntentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

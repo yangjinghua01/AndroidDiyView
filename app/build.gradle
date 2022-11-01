@@ -29,7 +29,8 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
+    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     //noinspection GradleCompatible,GradleCompatible,GradleCompatible
